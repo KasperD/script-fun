@@ -1,8 +1,6 @@
 script-fun
 ==========
 
-123456789-123456789-123456789-123456789-123456789-123456789-123456789-
-
 This is a public git repo where I will post my generic (and awful)
 path, perl, and other sctips I have created and am willing to post.
 
