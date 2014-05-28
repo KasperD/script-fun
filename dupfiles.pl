@@ -57,7 +57,7 @@ sub md5sum($)
     open (FO, $file);
     binmode(FO);
     my $md5 = Digest::MD5->new;
-    while (<>) 
+    while ($_) 
     {
         $md5->add($_);
     }
