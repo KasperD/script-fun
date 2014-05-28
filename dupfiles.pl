@@ -1,0 +1,70 @@
+#!/usr/bin/perl
+
+# use strict;
+use warnings;
+use POSIX;
+use Digest::MD5;
+
+## Setting Initial Directory to check
+
+
+my $Location;
+
+if (!$ARGV[0]) 
+{
+	print "Location to Search? ";
+	$Location = <STDIN>; 
+	chomp($Location);	
+}
+else 
+{	
+	$Location = $ARGV[0];	
+}
+
+sub md5sum_dir ($)
+{
+    my $path = shift;
+
+    opendir (DIR, $path) or die "Unable to open $path: $!";
+    my @files = map {$path . '/' . $_ }grep { !/^\.{1,2}$/ } readdir (DIR);
+    closedir (DIR);
+
+    foreach my $file (@files) 
+    {
+        if (-d $file) 
+        {
+            &md5sum_dir ($file);
+        } 
+        else 
+        { 
+            my $md = &md5sum($file); # you can find this subroutine in my other blogs
+            open (FO, ">>$result_file") or die ("Error :: Couldn't open file ($result_file) for writing\n");
+            print FO "$file\t$md\n";
+            close(FO);
+        }
+    }
+}
+
+sub md5sum($)
+{
+    my $file = shift;
+    die "Error::File ($file) does not exist!!!"    if (not -e $file);
+    open (FO, $file);
+    binmode(FO);
+    my $md5 = Digest::MD5->new;
+    while () 
+    {
+        $md5->add($_);
+    }
+    close(FO);
+    my $checksum = $md5->hexdigest;
+#    print "$checksum $file\n";
+    return $checksum;
+}
+
+
+# &md5sum_dir($Location);
+
+
+$pewper = "/home/dkasper/blacklist.sh";
+&md5sum($pewper);
