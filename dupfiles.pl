@@ -21,7 +21,9 @@ else
 	$Location = $ARGV[0];	
 }
 
-sub md5sum_dir ($)
+# copy/paste from
+# http://rinkeshbansal.blogspot.com/2012/08/calculating-md5dum-of-all-files-in.html
+sub md5sum_dir\($)
 {
     my $path = shift;
 
@@ -45,6 +47,8 @@ sub md5sum_dir ($)
     }
 }
 
+# copy/paste from
+# http://rinkeshbansal.blogspot.in/2012/08/calculating-md5sum-of-given-file.html
 sub md5sum($)
 {
     my $file = shift;
@@ -58,8 +62,9 @@ sub md5sum($)
     }
     close(FO);
     my $checksum = $md5->hexdigest;
-#    print "$checksum $file\n";
+    print "$checksum $file\n";
     return $checksum;
 }
 
-&md5sum_dir($Location);
+my $test2 = "/home/dkasper/.bash_history";
+&md5sum($test2);
