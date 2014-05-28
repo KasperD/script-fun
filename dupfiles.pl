@@ -7,6 +7,7 @@ use Digest::MD5;
 
 ## Setting Initial Directory to check
 
+$result_file = "/tmp/dupfiles.dump";
 
 my $Location;
 
@@ -23,7 +24,7 @@ else
 
 # copy/paste from
 # http://rinkeshbansal.blogspot.com/2012/08/calculating-md5dum-of-all-files-in.html
-sub md5sum_dir\($)
+sub md5sum_dir($)
 {
     my $path = shift;
 
@@ -56,7 +57,7 @@ sub md5sum($)
     open (FO, $file);
     binmode(FO);
     my $md5 = Digest::MD5->new;
-    while () 
+    while (<>) 
     {
         $md5->add($_);
     }
@@ -66,5 +67,4 @@ sub md5sum($)
     return $checksum;
 }
 
-my $test2 = "/home/dkasper/.bash_history";
-&md5sum($test2);
+&md5sum_dir($Location);
