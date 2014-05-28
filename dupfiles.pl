@@ -62,9 +62,4 @@ sub md5sum($)
     return $checksum;
 }
 
-
-# &md5sum_dir($Location);
-
-
-$pewper = "/home/dkasper/blacklist.sh";
-&md5sum($pewper);
+&md5sum_dir($Location);
