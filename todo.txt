@@ -1,0 +1,4 @@
+New or imrpoved scripts
+- create a kickstarter script for apt based systems
+- clean up the vi configuration script
+- add script to auto build user / host keys for openssl and gpg
