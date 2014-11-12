@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# FileName: blacklist.sh
+# File By: Donald R. Kasper <donald.kasper@gmail.com>
+# Purpose: Add known problem regions to a blacklist drop
+#          role.
+
 IPT="/sbin/iptables"
 
 if [ "$(id -u)" != "0" ]; then
@@ -7,6 +12,8 @@ if [ "$(id -u)" != "0" ]; then
   exit 1
 fi
 
+
+echo "Adding Blacklisted IPs..."
 $IPT -N blacklist
 $IPT -I INPUT -j blacklist
 $IPT -I OUTPUT -j blacklist
@@ -2692,3 +2699,4 @@ $IPT -I blacklist -s 223.254.0.0/16 -j DROP
 $IPT -I blacklist -s 223.255.0.0/17 -j DROP
 $IPT -I blacklist -s 223.255.236.0/22 -j DROP
 $IPT -I blacklist -s 223.255.252.0/23 -j DROP
+echo "...DONE"
