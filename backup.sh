@@ -63,6 +63,4 @@ if [ $1 ]; then
             exit 1
             ;;
     esac
-    echo "Out of case statment"
 fi
-echo "out of main script"
