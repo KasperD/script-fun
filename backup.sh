@@ -53,9 +53,7 @@ if [ $1 ]; then
             echo "...restoring directories"
             cd /
             tar -zxvf $SETTEMP/home.tar.gz
-            cd /
             tar -zxvf $SETTEMP/mail.tar.gz
-            cd /
             tar -zxvf $SETTEMP/apache.tar.gz
             ;;
         *)

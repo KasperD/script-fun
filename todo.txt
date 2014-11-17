@@ -1,4 +1,12 @@
-New or imrpoved scripts
-- create a kickstarter script for apt based systems
-- clean up the vi configuration script
-- add script to auto build user / host keys for openssl and gpg
+script: backup.sh
+- profit!
+
+script: vimsetup.sh
+- check if current config has plugins and backups & reads to system
+- remove the git call & shell script and add to this system
+
+script: blacklist.sh
+- add check to see if table exists and is clear
+
+script: host_lookup.py
+- create new hostlookup script in python to check information on domains
