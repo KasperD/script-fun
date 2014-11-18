@@ -11,9 +11,8 @@ if [ -d "$VIM" ]; then
      echo "Removed .vim/ directory"
 fi
 
-git clone https://github.com/Apreche/vim.git ~/.vim
-
-$VIM/setup.sh
+git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+vim +BundleInstall +qall
 
 if [ ! -d '$VIM/plugin' ]; then
     echo "Creating plugins directory"
