@@ -10,3 +10,6 @@ script: blacklist.sh
 
 script: host_lookup.py
 - create new hostlookup script in python to check information on domains
+
+script: kickstarter.py
+- create new kickstarter script that install software packages regually used
