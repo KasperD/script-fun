@@ -35,12 +35,29 @@ def GetPosts(feeds):
     return stories
     
 def SearchStory(stories):
+    '''
     StoryMax = int(len(stories)-1)
     StoryNew = 0
     for item in stories:
         StoryNum = stories.index(item)
         if item[3] > StoryNew:
-            StoryNew =  
+            StoryNew = item[3]
+            print StoryNew
+    '''
+    for row in range(len(stories)):
+        # defining the row to for pop call back
+        RowNum = stories.index(stories[row])
+        Newest = 0
+        for col in range(len(stories[row])):
+            # Aliases for list of list columns
+            StorySite = stories[row][0]
+            StoryDesc = stories[row][1]
+            StoryLink = stories[row][2]
+            StoryDate = stories[row][3]
+            if StoryDate >= Newest:
+                Newest = StoryDate
+                Post = stories.pop(int(Newest))
+                print Post
     return
     
 def BuildPage():
