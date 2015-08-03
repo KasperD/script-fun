@@ -3,61 +3,59 @@ import datetime
 import time
 from sys import argv
 
+Newest = 0
+
 def GetFeeds():
-    # Opens file & creates a list of RSS feeds to parse
-    # input = seperate text file called: files.list
-    # output = list of URLs for RSS feeds
-    
+    '''
+    Opens file & creates a list of RSS feeds to parse
+    input = seperate text file called: files.list
+    output = list of URLs for RSS feeds
+    '''
+
     with open('feed.list') as f:
         feeds = [line.strip() for line in f]
-    return feeds 
+    return feeds
 
 def GetPosts(feeds):
+    '''
     # downloads RSS feed with feedparser and throws results into a list
-    
-    # input = list of feed URLs (generated from GetFeeds)
-    # output = List of Lists with stores for past 365 days
-    
+
+    input = list of feed URLs (generated from GetFeeds)
+    output = List of Lists with stores for past 365 days
+    '''
     stories = []
     for url in feeds:
         d = feedparser.parse(url)
         doy = datetime.datetime.now().strftime('%j')
         for post in d.entries:
             PostDate = ""
-            if int(doy) - int(post.published_parsed[7]) <= 1:
+            if int(doy) - int(post.published_parsed[7]) <= 365:
                 for elements in post.published_parsed[:]:
                     if elements < 10:
                         Postdate = PostDate + "0"
                     PostDate = PostDate + str(elements)
                 if d.feed.title == "Latest in Anime News by Crunchyroll!":
                     d.feed.title = "Crunchyroll"
-                stories.append([d.feed.title, post.title[0:], post.link[0:], PostDate])
+                stories.append([d.feed.title, post.title, post.link, PostDate])
     return stories
     
-def SearchStory(stories):
+def SearchStory():
     '''
-    StoryMax = int(len(stories)-1)
-    StoryNew = 0
-    for item in stories:
-        StoryNum = stories.index(item)
-        if item[3] > StoryNew:
-            StoryNew = item[3]
-            print StoryNew
+    Searches for story with newest date and returns lists
+    input: stories (array)
+    output: 
     '''
+
     for row in range(len(stories)):
         # defining the row to for pop call back
         RowNum = stories.index(stories[row])
-        Newest = 0
+        if stories[row][3] >= Newest:
+            Newest = stories[row][3]
+            NewStory = stories.pop(RowNum)
+            return NewStory
+        '''
         for col in range(len(stories[row])):
-            # Aliases for list of list columns
-            StorySite = stories[row][0]
-            StoryDesc = stories[row][1]
-            StoryLink = stories[row][2]
-            StoryDate = stories[row][3]
-            if StoryDate >= Newest:
-                Newest = StoryDate
-                Post = stories.pop(int(Newest))
-                print Post
+        '''
     return
     
 def BuildPage():
@@ -67,9 +65,10 @@ def BuildPage():
 
 # Note 1.....
 # example of how to pull data == print stories[1][0] + " : " + stories[1][1]
-# [#][0] = Story title
-# [#][1] = Story Links
-# [#][2] = Story Post Date Integer
+# [#][0] = Site 
+# [#][1] = Story title
+# [#][2] = Story Links
+# [#][3] = Story Post Date Integer
 
 # Node 2.....
 # for each in stories:
@@ -77,4 +76,11 @@ def BuildPage():
 
 feeds = GetFeeds()
 stories = GetPosts(feeds)
-search = SearchStory(stories)
+# search = SearchStory()
+
+StoryCount = len(stories)
+
+while StoryCount > 0:
+    StoryCount = StoryCount - 1
+    search = SearchStory()
+    print search[3] + ": " + search[0] + "  " +search[1]
