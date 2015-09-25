@@ -29,7 +29,7 @@ def GetPosts(feeds):
         doy = datetime.datetime.now().strftime('%j')
         for post in d.entries:
             PostDate = ""
-            if int(doy) - int(post.published_parsed[7]) <= 365:
+            if int(doy) - int(post.published_parsed[7]) <= 1:
                 for elements in post.published_parsed[:]:
                     if elements < 10:
                         Postdate = PostDate + "0"
@@ -45,7 +45,7 @@ def SearchStory():
     input: stories (array)
     output: 
     '''
-
+    Newest = '';
     for row in range(len(stories)):
         # defining the row to for pop call back
         RowNum = stories.index(stories[row])
