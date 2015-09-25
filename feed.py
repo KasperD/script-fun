@@ -8,6 +8,7 @@ Newest = 0
 def GetFeeds():
     '''
     Opens file & creates a list of RSS feeds to parse
+
     input = seperate text file called: files.list
     output = list of URLs for RSS feeds
     '''
@@ -42,6 +43,7 @@ def GetPosts(feeds):
 def SearchStory():
     '''
     Searches for story with newest date and returns lists
+    
     input: stories (array)
     output: 
     '''
