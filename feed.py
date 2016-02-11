@@ -32,8 +32,8 @@ def GetPosts(feeds):
             PostDate = ""
             if int(doy) - int(post.published_parsed[7]) <= 1:
                 for elements in post.published_parsed[:]:
-                    if elements < 10:
-                        Postdate = PostDate + "0"
+              #      if elements < 10:
+              #          Postdate = PostDate + "0"
                     PostDate = PostDate + str(elements)
                 if d.feed.title == "Latest in Anime News by Crunchyroll!":
                     d.feed.title = "Crunchyroll"
